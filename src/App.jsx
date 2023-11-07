@@ -1,37 +1,7 @@
 import PokemonCard from "./components/PokemonCard";
 import "./app.css";
 import { useState } from "react";
-
-function Card() {
-  const [pokemonIndex, setPokemonIndex] = useState(0);
-
-  const handleClickSuivant = () => {
-    if (pokemonIndex < pokemonList.length - 1) {
-      setPokemonIndex(pokemonIndex + 1);
-    }
-  };
-  const handleClickPrecedent = () => {
-    if (pokemonIndex > 0) {
-      setPokemonIndex(pokemonIndex - 1);
-    }
-  };
-
-  return (
-    <div>
-      <button onClick={handleClickPrecedent} disabled={pokemonIndex === 0}>
-        precedent
-      </button>
-      <button
-        onClick={handleClickSuivant}
-        disabled={pokemonIndex === pokemonList.length - 1}
-      >
-        suivant
-      </button>
-
-      <PokemonCard pokemon={pokemonList[pokemonIndex]} />
-    </div>
-  );
-}
+import NavBar from "./components/NavBar";
 
 const pokemonList = [
   {
@@ -58,5 +28,32 @@ const pokemonList = [
     name: "mew",
   },
 ];
+
+function Card() {
+  const [pokemonIndex, setPokemonIndex] = useState(0);
+
+  const handleClickSuivant = () => {
+    if (pokemonIndex < pokemonList.length - 1) {
+      setPokemonIndex(pokemonIndex + 1);
+    }
+  };
+  const handleClickPrecedent = () => {
+    if (pokemonIndex > 0) {
+      setPokemonIndex(pokemonIndex - 1);
+    }
+  };
+
+  return (
+    <div>
+      <NavBar
+        pokemonIndex={pokemonIndex}
+        handleClickPrecedent={handleClickPrecedent}
+        handleClickSuivant={handleClickSuivant}
+        pokemonList={pokemonList}
+      />
+      <PokemonCard pokemon={pokemonList[pokemonIndex]} />
+    </div>
+  );
+}
 
 export default Card;
